@@ -7,11 +7,12 @@ const {
 } = require("../Controllers/projectController");
 
 const auth = require("../middleware/auth");
-const upload = require("../middleware/upload");
+
+const parser = require("../config/cloudinary");
 
 router.get("/", getProjects);
 
-router.post("/", auth, upload.single("imageFile"), createProject);
+router.post("/", auth, parser.single("image"), createProject);
 
 router.delete("/:id", auth, deleteProject);
 

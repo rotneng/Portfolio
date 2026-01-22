@@ -4,9 +4,12 @@ import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 const ProjectCard = ({ project }) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  const defaultImage =
+    "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80";
+
   const styles = {
     card: {
-      backgroundColor: "#111625", 
+      backgroundColor: "#111625",
       borderRadius: "16px",
       overflow: "hidden",
       border: "1px solid rgba(255, 255, 255, 0.05)",
@@ -88,7 +91,10 @@ const ProjectCard = ({ project }) => {
     >
       <div style={styles.imageContainer}>
         <img
-          src={project.image || "https://via.placeholder.com/400x200"}
+          src={project.image || defaultImage}
+          onError={(e) => {
+            e.target.src = defaultImage;
+          }}
           alt={project.title}
           style={styles.image}
         />
@@ -99,8 +105,8 @@ const ProjectCard = ({ project }) => {
         <p style={styles.description}>{project.description}</p>
 
         <div style={styles.tagsContainer}>
-          {project.technologies &&
-            project.technologies.map((tech, index) => (
+          {project.techStack &&
+            project.techStack.map((tech, index) => (
               <span key={index} style={styles.tag}>
                 {tech}
               </span>
@@ -108,22 +114,26 @@ const ProjectCard = ({ project }) => {
         </div>
 
         <div style={styles.linksContainer}>
-          <a
-            href={project.githubLink}
-            target="_blank"
-            rel="noreferrer"
-            style={styles.link}
-          >
-            <FaGithub /> Code
-          </a>
-          <a
-            href={project.liveLink}
-            target="_blank"
-            rel="noreferrer"
-            style={styles.link}
-          >
-            <FaExternalLinkAlt /> Live Demo
-          </a>
+          {project.githubLink && (
+            <a
+              href={project.githubLink}
+              target="_blank"
+              rel="noreferrer"
+              style={styles.link}
+            >
+              <FaGithub /> Code
+            </a>
+          )}
+          {project.liveLink && (
+            <a
+              href={project.liveLink}
+              target="_blank"
+              rel="noreferrer"
+              style={styles.link}
+            >
+              <FaExternalLinkAlt /> Live Demo
+            </a>
+          )}
         </div>
       </div>
     </div>

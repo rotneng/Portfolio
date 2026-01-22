@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -38,7 +40,7 @@ const Navbar = () => {
     logo: {
       fontSize: "1.5rem",
       fontWeight: "bold",
-      background: "linear-gradient(to right, #8a2be2, #d65db1)", 
+      background: "linear-gradient(to right, #8a2be2, #d65db1)",
       WebkitBackgroundClip: "text",
       WebkitTextFillColor: "transparent",
       cursor: "pointer",
@@ -57,16 +59,15 @@ const Navbar = () => {
       padding: "8px 12px",
       transition: "color 0.3s ease",
     },
-    socialIcons: {
-      display: "flex",
-      alignItems: "center",
-      gap: "16px",
-    },
-    iconLink: {
-      color: "#9ca3af",
-      display: "flex",
-      alignItems: "center",
-      textDecoration: "none",
+    secretDot: {
+      width: "6px",
+      height: "6px",
+      backgroundColor: "#374151",
+      borderRadius: "50%",
+      cursor: "pointer",
+      marginLeft: "-15px",
+      opacity: 0.6,
+      transition: "opacity 0.3s ease",
     },
     mobileButton: {
       background: "none",
@@ -111,6 +112,14 @@ const Navbar = () => {
                   {item}
                 </a>
               ))}
+
+              <div
+                style={styles.secretDot}
+                onClick={() => navigate("/login")}
+                title="Admin Login"
+                onMouseEnter={(e) => (e.target.style.opacity = "1")}
+                onMouseLeave={(e) => (e.target.style.opacity = "0.6")}
+              />
             </div>
           )}
 

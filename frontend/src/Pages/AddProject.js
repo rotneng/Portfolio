@@ -8,37 +8,43 @@ const AddProject = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    image: "",
     technologies: "",
     githubLink: "",
     liveLink: "",
+    category: "Web Apps",
   });
 
+  const [imageFile, setImageFile] = useState(null);
   const [status, setStatus] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleFileChange = (e) => {
+    setImageFile(e.target.files[0]);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("submitting");
 
-    const techArray = formData.technologies
-      .split(",")
-      .map((tech) => tech.trim());
+    const data = new FormData();
+    data.append("title", formData.title);
+    data.append("description", formData.description);
+    data.append("category", formData.category);
+    data.append("techStack", formData.technologies);
+    data.append("githubLink", formData.githubLink);
+    data.append("liveLink", formData.liveLink);
 
-    const payload = {
-      ...formData,
-      technologies: techArray,
-    };
+    if (imageFile) {
+      data.append("image", imageFile);
+    }
 
     try {
-
-      await API.post("/projects", payload);
+      await API.post("/projects", data);
 
       setStatus("success");
-
       setTimeout(() => {
         navigate("/");
       }, 2000);
@@ -47,8 +53,6 @@ const AddProject = () => {
       setStatus("error");
     }
   };
-
-
 
   const styles = {
     page: {
@@ -92,6 +96,16 @@ const AddProject = () => {
       color: "white",
       outline: "none",
       fontSize: "1rem",
+    },
+    fileInput: {
+      width: "100%",
+      padding: "14px",
+      marginBottom: "20px",
+      backgroundColor: "#0a0e17",
+      border: "1px dashed rgba(255, 255, 255, 0.3)",
+      borderRadius: "8px",
+      color: "white",
+      cursor: "pointer",
     },
     textarea: {
       width: "100%",
@@ -163,13 +177,13 @@ const AddProject = () => {
           </div>
 
           <div>
-            <label style={styles.label}>Image URL (e.g. from Unsplash)</label>
+            <label style={styles.label}>Project Image (Upload)</label>
             <input
-              style={styles.input}
-              name="image"
-              placeholder="https://..."
-              value={formData.image}
-              onChange={handleChange}
+              type="file"
+              accept="image/*"
+              style={styles.fileInput}
+              onChange={handleFileChange}
+              required
             />
           </div>
 

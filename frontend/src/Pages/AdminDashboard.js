@@ -59,9 +59,20 @@ const AdminDashboard = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    Object.keys(projForm).forEach((key) => formData.append(key, projForm[key]));
+
+    // 1. Append standard fields
+    formData.append("title", projForm.title);
+    formData.append("description", projForm.description);
+    formData.append("category", projForm.category);
+    formData.append("githubLink", projForm.githubLink);
+    formData.append("liveLink", projForm.liveLink);
+    formData.append("isFeatured", projForm.isFeatured);
+    formData.append("techStack", projForm.technologies);
+
     if (projForm.imageType === "upload" && imageFile) {
-      formData.append("imageFile", imageFile);
+      formData.append("image", imageFile);
+    } else {
+      formData.append("image", projForm.image);
     }
 
     try {
@@ -70,18 +81,26 @@ const AdminDashboard = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      alert("Project Added!");
+      alert("Project Added Successfully!");
+
       setProjForm({
-        ...projForm,
         title: "",
         description: "",
+        category: "Web Apps",
         technologies: "",
+        githubLink: "",
+        liveLink: "",
+        imageType: "url",
         image: "",
+        isFeatured: false,
       });
       setImageFile(null);
       fetchData();
     } catch (err) {
-      alert("Error adding project");
+      console.error("Upload Error:", err);
+      alert(
+        "Error adding project: " + (err.response?.data?.error || err.message),
+      );
     }
   };
 

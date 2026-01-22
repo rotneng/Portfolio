@@ -15,22 +15,22 @@ exports.createProject = async (req, res) => {
       title,
       description,
       category,
-      technologies,
+      techStack,
       githubLink,
       liveLink,
-      imageType,
-      image,
       isFeatured,
     } = req.body;
 
-    const techStackArray = technologies
-      ? technologies.split(",").map((t) => t.trim())
+    const techStackArray = techStack
+      ? techStack.split(",").map((t) => t.trim())
       : [];
 
-    let finalImage = image;
+    let finalImage = "";
 
-    if (imageType === "upload" && req.file) {
-      finalImage = `http://localhost:5000/uploads/${req.file.filename}`;
+    if (req.file) {
+      finalImage = req.file.path;
+    } else if (req.body.image) {
+      finalImage = req.body.image;
     }
 
     const newProject = new Project({
