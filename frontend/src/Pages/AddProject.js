@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import API from "../api";
 import { useNavigate } from "react-router-dom";
 
 const AddProject = () => {
@@ -34,7 +34,9 @@ const AddProject = () => {
     };
 
     try {
-      await axios.post("http://localhost:5000/api/projects", payload);
+
+      await API.post("/projects", payload);
+
       setStatus("success");
 
       setTimeout(() => {
@@ -45,6 +47,8 @@ const AddProject = () => {
       setStatus("error");
     }
   };
+
+
 
   const styles = {
     page: {

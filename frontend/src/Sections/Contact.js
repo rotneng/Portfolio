@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
-
+import API from "../api"; 
 import {
   FaPaperPlane,
   FaEnvelope,
@@ -29,7 +28,8 @@ const Contact = () => {
     setStatus("submitting");
 
     try {
-      await axios.post("http://localhost:5000/api/contact", formData);
+      await API.post("/contact", formData);
+
       setStatus("success");
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {

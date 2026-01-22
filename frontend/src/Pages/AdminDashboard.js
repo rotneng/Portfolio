@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import API from "../api";
 import { useNavigate } from "react-router-dom";
 import { FaTrash, FaSignOutAlt } from "react-icons/fa";
 
@@ -41,8 +41,8 @@ const AdminDashboard = () => {
 
   const fetchData = async () => {
     try {
-      const pRes = await axios.get("http://localhost:5000/api/projects");
-      const sRes = await axios.get("http://localhost:5000/api/skills");
+      const pRes = await API.get("/projects");
+      const sRes = await API.get("/skills");
       setProjects(pRes.data);
       setSkills(sRes.data);
     } catch (err) {
@@ -65,9 +65,8 @@ const AdminDashboard = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/projects", formData, {
+      await API.post("/projects", formData, {
         headers: {
-          "x-auth-token": token,
           "Content-Type": "multipart/form-data",
         },
       });
@@ -89,9 +88,8 @@ const AdminDashboard = () => {
   const handleSkillSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/skills", skillForm, {
-        headers: { "x-auth-token": token },
-      });
+      await API.post("/skills", skillForm);
+
       setSkillForm({
         name: "",
         percentage: 50,
@@ -107,9 +105,7 @@ const AdminDashboard = () => {
   const deleteItem = async (type, id) => {
     if (!window.confirm("Are you sure?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/${type}/${id}`, {
-        headers: { "x-auth-token": token },
-      });
+      await API.delete(`/${type}/${id}`);
       fetchData();
     } catch (err) {
       alert("Error deleting item");

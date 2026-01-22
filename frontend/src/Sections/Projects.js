@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api";
 import {
   FaGithub,
   FaExternalLinkAlt,
@@ -11,8 +11,7 @@ const Projects = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/projects")
+    API.get("/projects")
       .then((res) => setProjects(res.data))
       .catch((err) => console.error(err));
   }, []);

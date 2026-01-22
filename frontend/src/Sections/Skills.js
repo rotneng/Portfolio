@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import API from "../api";
 import { motion } from "framer-motion";
 import {
   FaReact,
@@ -24,6 +24,8 @@ const Skills = () => {
   const [loading, setLoading] = useState(true);
 
   const getIcon = (name) => {
+    if (!name) return null;
+
     const lowerName = name.toLowerCase();
     if (lowerName.includes("react")) return <FaReact color="#61DAFB" />;
     if (lowerName.includes("node")) return <FaNodeJs color="#339933" />;
@@ -49,13 +51,13 @@ const Skills = () => {
           background: "#ccc",
         }}
       />
-    ); 
+    );
   };
 
   useEffect(() => {
     const fetchSkills = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/skills");
+        const response = await API.get("/skills");
         setSkills(response.data);
         setLoading(false);
       } catch (error) {

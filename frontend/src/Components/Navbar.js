@@ -11,16 +11,16 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const isMobile = windowWidth < 768; 
+  const isMobile = windowWidth < 768;
 
   const styles = {
     nav: {
       position: "fixed",
       width: "100%",
       zIndex: 50,
-      backgroundColor: "rgba(10, 14, 23, 0.8)", 
-      backdropFilter: "blur(12px)", 
-      WebkitBackdropFilter: "blur(12px)", 
+      backgroundColor: "rgba(10, 14, 23, 0.8)",
+      backdropFilter: "blur(12px)",
+      WebkitBackdropFilter: "blur(12px)",
       borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
       transition: "all 0.3s ease",
     },
@@ -38,7 +38,7 @@ const Navbar = () => {
     logo: {
       fontSize: "1.5rem",
       fontWeight: "bold",
-      background: "linear-gradient(to right, #8a2be2, #d65db1)", // Purple to Pink
+      background: "linear-gradient(to right, #8a2be2, #d65db1)", 
       WebkitBackgroundClip: "text",
       WebkitTextFillColor: "transparent",
       cursor: "pointer",
@@ -76,7 +76,7 @@ const Navbar = () => {
       padding: "8px",
     },
     mobileMenu: {
-      backgroundColor: "#111625", 
+      backgroundColor: "#111625",
       borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
       padding: "8px 16px 16px 16px",
     },
