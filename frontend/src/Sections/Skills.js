@@ -9,7 +9,6 @@ import {
   FaJs,
   FaDatabase,
   FaGitAlt,
-  FaDocker,
   FaPython,
 } from "react-icons/fa";
 import {
