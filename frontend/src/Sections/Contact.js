@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import API from "../api"; 
+import API from "../api";
 import {
   FaPaperPlane,
   FaEnvelope,
@@ -9,6 +9,7 @@ import {
   FaGithub,
   FaInstagram,
   FaWhatsapp,
+  FaFileAlt, 
 } from "react-icons/fa";
 
 const Contact = () => {
@@ -85,6 +86,21 @@ const Contact = () => {
       gap: "16px",
       marginBottom: "20px",
       color: "#e5e7eb",
+    },
+    cvButton: {
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "10px",
+      marginTop: "10px", 
+      padding: "12px 24px",
+      backgroundColor: "#1f2937", 
+      color: "white",
+      textDecoration: "none",
+      borderRadius: "8px",
+      fontWeight: "bold",
+      border: "1px solid #374151", 
+      transition: "all 0.3s ease",
+      width: "fit-content",
     },
     socialHeader: {
       marginTop: "auto",
@@ -178,6 +194,23 @@ const Contact = () => {
               <FaMapMarkerAlt color="#8a2be2" size={20} />
               <span>Jos, Nigeria</span>
             </div>
+
+            <a
+              href="https://instantfind.me/rotnen"
+              target="_blank"
+              rel="noreferrer"
+              style={styles.cvButton}
+              onMouseEnter={(e) => {
+                e.target.style.borderColor = "#8a2be2";
+                e.target.style.color = "#8a2be2";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.borderColor = "#374151";
+                e.target.style.color = "white";
+              }}
+            >
+              <FaFileAlt /> View My Resume
+            </a>
           </div>
 
           <div>

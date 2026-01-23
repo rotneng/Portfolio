@@ -43,7 +43,7 @@ function App() {
                   fontSize: "0.9rem",
                 }}
               >
-                <p>© 2026 Portfolio. Built with MERN Stack.</p>
+                <p>© 2026 Portfolio @Rotnen</p>
               </footer>
             </div>
           }
