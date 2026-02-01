@@ -58,9 +58,13 @@ const AdminDashboard = () => {
   const handleProjectSubmit = async (e) => {
     e.preventDefault();
 
+    if (projForm.imageType === "upload" && !imageFile) {
+      alert("Please select a file to upload!");
+      return;
+    }
+
     const formData = new FormData();
 
-    // 1. Append standard fields
     formData.append("title", projForm.title);
     formData.append("description", projForm.description);
     formData.append("category", projForm.category);
@@ -95,9 +99,12 @@ const AdminDashboard = () => {
         isFeatured: false,
       });
       setImageFile(null);
+      document.getElementById("fileInput").value = "";
+
       fetchData();
     } catch (err) {
       console.error("Upload Error:", err);
+
       alert(
         "Error adding project: " + (err.response?.data?.error || err.message),
       );
@@ -305,6 +312,7 @@ const AdminDashboard = () => {
                 />
               ) : (
                 <input
+                  id="fileInput"
                   type="file"
                   style={{ marginBottom: "15px", color: "white" }}
                   onChange={(e) => setImageFile(e.target.files[0])}
