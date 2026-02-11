@@ -9,7 +9,7 @@ import {
   FaGithub,
   FaInstagram,
   FaWhatsapp,
-  FaFileAlt, 
+  FaFileAlt,
 } from "react-icons/fa";
 
 const Contact = () => {
@@ -91,14 +91,14 @@ const Contact = () => {
       display: "inline-flex",
       alignItems: "center",
       gap: "10px",
-      marginTop: "10px", 
+      marginTop: "10px",
       padding: "12px 24px",
-      backgroundColor: "#1f2937", 
+      backgroundColor: "#1f2937",
       color: "white",
       textDecoration: "none",
       borderRadius: "8px",
       fontWeight: "bold",
-      border: "1px solid #374151", 
+      border: "1px solid #374151",
       transition: "all 0.3s ease",
       width: "fit-content",
     },
@@ -250,7 +250,7 @@ const Contact = () => {
               </a>
 
               <a
-                href="https://www.instagram.com/goyit_murotnen?igsh=MXZ2bDdsZG12bzJvbw%3D%3D&utm_source=qr"
+                href="https://www.instagram.com/_rotnen?igsh=bjJtODkxdjA2bGpy&utm_source=qr"
                 target="_blank"
                 rel="noreferrer"
                 style={styles.socialLink}
@@ -261,7 +261,7 @@ const Contact = () => {
               </a>
 
               <a
-                href="https://wa.me/2348000000000"
+                href="https://wa.me/2349071403280"
                 target="_blank"
                 rel="noreferrer"
                 style={styles.socialLink}
